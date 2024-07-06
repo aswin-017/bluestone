@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Dashboard from './components/Dashboard';
+import EnquiryForm from './components/EnquiryForm';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path='/enquiryform' element={<EnquiryForm />}/>
         </Routes>
       </Router>
     </AuthProvider>

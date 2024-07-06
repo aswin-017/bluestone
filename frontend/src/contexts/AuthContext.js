@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
@@ -11,6 +11,25 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          // Verify token validity on the server side if necessary
+          const response = await axios.get('http://localhost:3000/api/users/profile');
+          setIsLoggedIn(true);
+          setUser(response.data.user);
+        } catch (error) {
+          console.error('Error checking token:', error);
+          logout(); // Clear invalid token or handle as needed
+        }
+      }
+    };
+
+    checkLoggedIn();
+  }, []); // Empty dependency array ensures this runs only once on component mount
+
   const login = async (email, password) => {
     try {
       const response = await axios.post('http://localhost:3000/api/users/login', { email, password });
@@ -18,8 +37,8 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(true);
       setUser(response.data.user);
     } catch (error) {
-      console.error('Error logging in:', error.response?.data?.error || error.message);
-    }
+      alert('Error logging in:', error.response?.data?.error || error.message);
+    } 
   };
 
   const signup = async (newUser) => {

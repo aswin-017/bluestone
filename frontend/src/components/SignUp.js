@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext'; // Assuming you have an AuthContext for handling authentication
+import '../assets/css/SignUp.css'; // Import the CSS file for styling
 
 const SignUp = () => {
-  const { signup } = useAuth();
+  const { signup } = useAuth(); // Assuming useAuth provides a signup function
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -19,12 +20,19 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(formData);
-    navigate('/login');
+
+    try {
+      await signup(formData); // Assuming signup function sends a POST request to backend
+      navigate('/login'); // Redirect to login page after successful signup
+    } catch (error) {
+      console.error('Signup Error:', error);
+      // Handle signup error (display error message, etc.)
+      alert('Signup failed. Please try again.'); // Example error handling
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="signup-form" onSubmit={handleSubmit}>
       <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" required />
       <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Last Name" required />
       <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />

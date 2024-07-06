@@ -44,22 +44,17 @@ const Nav = () => {
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-
-
-      <div
-        className="collapse navbar-collapse justify-content-md-center"
-        id="navbarsExample10"
-      >
+    <nav className="navbar">
+      <span className="company-name">BLUESTONE</span>
+      <div className="nav-links">
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/" className="nav-link">
               Home
             </Link>
           </li>
+          {isLoggedIn ? userLink : loginRegLink}
         </ul>
-        {isLoggedIn ? userLink : loginRegLink}
-        <span className="company-name">Bluestone</span>
       </div>
     </nav>
   );

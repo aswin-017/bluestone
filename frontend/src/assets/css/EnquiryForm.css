@@ -1,0 +1,114 @@
+.wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .form-step {
+    width: 100%;
+  }
+  
+  .user-details,
+  .education-details,
+  .additional-details {
+    display: none;
+  }
+  
+  .active {
+    display: block;
+  }
+  
+  .input-box {
+    margin-bottom: 15px;
+  }
+  
+  .input-box span.details {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input-box input,
+  .input-box textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .input-box textarea {
+    height: 100px;
+  }
+  
+  .gender-details {
+    margin-bottom: 15px;
+  }
+  
+  .gender-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .category label {
+    margin-right: 20px;
+  }
+  
+  .terms-container {
+    margin-top: 10px;
+  }
+  
+  .terms {
+    font-size: 14px;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .button-container1 {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .button-container1 button,
+  .button-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-container1 button:hover,
+  .button-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .button-container1 button[type="button"] {
+    margin-right: 10px;
+  }
+  
+  .button-container button[type="submit"] {
+    padding: 10px 30px;
+    background-color: #28a745;
+  }
+  
+  .button-container button[type="submit"]:hover {
+    background-color: #218838;
+  }
+  

@@ -1,59 +1,36 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 import '../assets/css/Nav.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useTheme } from './ThemeContext'; // Import useTheme
 
 const Nav = () => {
-  const { isLoggedIn, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logout();
-    navigate('/');
-  };
-
-  const loginRegLink = (
-    <ul className="navbar-nav">
-      <li className="nav-item">
-        <Link to="/login" className="nav-link">
-          Login
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link to="/signup" className="nav-link">
-          Sign Up
-        </Link>
-      </li>
-    </ul>
-  );
-
-  const userLink = (
-    <ul className="navbar-nav">
-      <li className="nav-item">
-        <Link to="/dashboard" className="nav-link">
-          Dashboard
-        </Link>
-      </li>
-      <li className="nav-item">
-        <a href="/" onClick={handleLogout} className="nav-link">
-          Logout
-        </a>
-      </li>
-    </ul>
-  );
+  const { theme, toggleTheme } = useTheme(); // Use theme and toggleTheme from ThemeContext
 
   return (
     <nav className="navbar">
-      <span className="company-name">BLUESTONE</span>
+      <div className="company-name">Bluestone</div>
       <div className="nav-links">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
+            <Link className="nav-link" to="/">Home</Link>
           </li>
-          {isLoggedIn ? userLink : loginRegLink}
+          <li className="nav-item">
+            <Link className="nav-link" to="/login">Login</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/signup">Sign Up</Link>
+          </li>
+          <li className="nav-item">
+            <label className="switch">
+              <input
+                type="checkbox"
+                className="input__check"
+                checked={theme === 'dark'}
+                onChange={toggleTheme}
+              />
+              <span className="slider"></span>
+            </label>
+          </li>
         </ul>
       </div>
     </nav>

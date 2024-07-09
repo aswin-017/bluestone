@@ -1,0 +1,110 @@
+:root {
+  --light-bg-color: #ffffff;
+  --light-text-color: #1a202c;
+  --light-content-bg: #f0f0f0;
+  --light-main-content-bg: #f0f0f0;
+  --light-main-content-color: #1a202c;
+
+  --dark-bg-color: #1d2634;
+  --dark-text-color: #9e9ea4;
+  --dark-content-bg: #1d2634;
+  --dark-main-content-bg: #1d2634;
+  --dark-main-content-color: #9e9ea4;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container.light {
+  background-color: var(--light-bg-color);
+  color: var(--light-text-color);
+}
+
+.app-container.dark {
+  background-color: var(--dark-bg-color);
+  color: var(--dark-text-color);
+}
+
+.flex-container {
+  display: flex;
+  height: 100vh; /* Ensure the container takes full viewport height */
+}
+
+.main-content {
+  flex-grow: 1; /* Allow the main content to grow and fill the remaining space */
+  padding: 20px;
+  background-color: var(--dark-main-content-bg);
+  color: var(--dark-main-content-color);
+  overflow-y: auto; /* Add scroll if the content exceeds viewport height */
+}
+
+.main-content.light {
+  background-color: var(--light-main-content-bg);
+  color: var(--light-main-content-color);
+}
+
+.main-content.dark {
+  background-color: var(--dark-main-content-bg);
+  color: var(--dark-main-content-color);
+}
+
+.content {
+  padding: 20px;
+  height: 100vh;
+
+}
+
+.content.light {
+  background-color: var(--light-content-bg);
+  color: var(--light-text-color);
+}
+
+.content.dark {
+  background-color: var(--dark-content-bg);
+  color: var(--dark-text-color);
+}
+
+/* Media Queries */
+@media screen and (max-width: 992px) {
+  .flex-container {
+    flex-direction: column;
+  }
+
+  #sidebar {
+    display: none;
+  }
+
+  .menu-icon {
+    display: inline;
+  }
+
+  .sidebar-title > span {
+    display: inline;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+
+  .charts {
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header-left {
+    display: none;
+  }
+}

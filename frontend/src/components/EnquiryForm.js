@@ -10,17 +10,24 @@ const EnquiryForm = ({ setUsername }) => {
     firstName: '',
     lastName: '',
     email: '',
-    password: '',
+    phoneNumber: '',
     gender: '',
     nationality: '',
     dateOfBirth: '',
-    educationLevel: '',
+    highestEducationLevel: '',
     intendedCourse: '',
     targetCountry: '',
     additionalInfo: '',
-    linkedInProfile: '',
     preferredStartDate: '',
-    budget: '',
+    fieldOfStudy: '',
+    graduationYear: '',
+    englishProficiency: '',
+    otherLanguages: '',
+    careerGoals: '',
+    skillsInterests: '',
+    parentGuardianContact: '',
+    accommodationAssistance: false,
+    travelAssistance: false,
     termsAccepted: false,
   });
 
@@ -44,26 +51,33 @@ const EnquiryForm = ({ setUsername }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/enquiryform', formData); // Assuming your Express server is running on port 3000
+      const response = await axios.post('http://localhost:3000/api/enquiryform', formData); // Replace with your API endpoint
       console.log('Response:', response.data);
       alert('Enquiry submitted successfully!');
-      setUsername(response.data.firstName, response.data.lastName);
+      setUsername(`${response.data.firstName} ${response.data.lastName}`);
       navigate('/user/dashboard');
       setFormData({
         firstName: '',
         lastName: '',
         email: '',
-        password: '',
+        phoneNumber: '',
         gender: '',
         nationality: '',
         dateOfBirth: '',
-        educationLevel: '',
+        highestEducationLevel: '',
         intendedCourse: '',
         targetCountry: '',
         additionalInfo: '',
-        linkedInProfile: '',
         preferredStartDate: '',
-        budget: '',
+        fieldOfStudy: '',
+        graduationYear: '',
+        englishProficiency: '',
+        otherLanguages: '',
+        careerGoals: '',
+        skillsInterests: '',
+        parentGuardianContact: '',
+        accommodationAssistance: false,
+        travelAssistance: false,
         termsAccepted: false,
       });
       setStep(1);
@@ -113,12 +127,12 @@ const EnquiryForm = ({ setUsername }) => {
             />
           </div>
           <div className="input-box">
-            <span className="details">Password</span>
+            <span className="details">Phone Number</span>
             <input
-              type="password"
-              placeholder="Enter your password"
-              name="password"
-              value={formData.password}
+              type="text"
+              placeholder="Enter your phone number"
+              name="phoneNumber"
+              value={formData.phoneNumber}
               onChange={handleChange}
               required
             />
@@ -161,8 +175,8 @@ const EnquiryForm = ({ setUsername }) => {
               </label>
             </div>
           </div>
-          <div className="button-container1">
-            {step < 3 && <button type="button" onClick={handleNextStep}>Next</button>}
+          <div className="button-container">
+            <button type="button" onClick={handleNextStep}>Save and Continue</button>
           </div>
         </div>
 
@@ -190,12 +204,34 @@ const EnquiryForm = ({ setUsername }) => {
             />
           </div>
           <div className="input-box">
-            <span className="details">Education Level</span>
+            <span className="details">Highest Education Level</span>
             <input
               type="text"
-              placeholder="Enter your education level"
-              name="educationLevel"
-              value={formData.educationLevel}
+              placeholder="Enter your highest education level"
+              name="highestEducationLevel"
+              value={formData.highestEducationLevel}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-box">
+            <span className="details">Field of Study</span>
+            <input
+              type="text"
+              placeholder="Enter your field of study"
+              name="fieldOfStudy"
+              value={formData.fieldOfStudy}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-box">
+            <span className="details">Graduation Year</span>
+            <input
+              type="text"
+              placeholder="Enter your graduation year"
+              name="graduationYear"
+              value={formData.graduationYear}
               onChange={handleChange}
               required
             />
@@ -222,57 +258,89 @@ const EnquiryForm = ({ setUsername }) => {
               required
             />
           </div>
+          <div className="input-box">
+            <span className="details">English Proficiency</span>
+            <input
+              type="text"
+              placeholder="Enter your English proficiency level"
+              name="englishProficiency"
+              value={formData.englishProficiency}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-box">
+            <span className="details">Other Languages</span>
+            <input
+              type="text"
+              placeholder="Enter other languages you speak"
+              name="otherLanguages"
+              value={formData.otherLanguages}
+              onChange={handleChange}
+              required
+            />
+          </div>
           <div className="button-container">
             <button type="button" onClick={handlePrevStep}>Previous</button>
-            {step < 3 && <button type="button" onClick={handleNextStep}>Next</button>}
+            <button type="button" onClick={handleNextStep}>Save and Continue</button>
           </div>
         </div>
 
         {/* Step 3 */}
         <div className={`additional-details ${step === 3 ? 'active' : ''}`}>
           <div className="input-box">
-            <span className="details">Additional Information</span>
+            <span className="details">Career Goals</span>
             <textarea
-              placeholder="Enter any additional information"
-              name="additionalInfo"
-              value={formData.additionalInfo}
+              placeholder="Enter your career goals"
+              name="careerGoals"
+              value={formData.careerGoals}
               onChange={handleChange}
               required
             />
           </div>
           <div className="input-box">
-            <span className="details">LinkedIn Profile</span>
-            <input
-              type="url"
-              placeholder="Enter your LinkedIn profile URL"
-              name="linkedInProfile"
-              value={formData.linkedInProfile}
+            <span className="details">Skills and Interests</span>
+            <textarea
+              placeholder="Enter your skills and interests"
+              name="skillsInterests"
+              value={formData.skillsInterests}
               onChange={handleChange}
               required
             />
           </div>
           <div className="input-box">
-            <span className="details">Preferred Start Date</span>
-            <input
-              type="date"
-              name="preferredStartDate"
-              value={formData.preferredStartDate}
+            <span className="details">Parent/Guardian Contact</span>
+            <textarea
+              placeholder="Enter parent/guardian contact details"
+              name="parentGuardianContact"
+              value={formData.parentGuardianContact}
               onChange={handleChange}
               required
             />
           </div>
           <div className="input-box">
-            <span className="details">Budget for Studies</span>
-            <input
-              type="number"
-              placeholder="Enter your budget for studies"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              required
-            />
+            <label>
+              <input
+                type="checkbox"
+                name="accommodationAssistance"
+                checked={formData.accommodationAssistance}
+                onChange={handleChange}
+              />
+              Accommodation Assistance
+            </label>
           </div>
-          <div className="input-box terms-container">
+          <div className="input-box">
+            <label>
+              <input
+                type="checkbox"
+                name="travelAssistance"
+                checked={formData.travelAssistance}
+                onChange={handleChange}
+              />
+              Travel Assistance
+            </label>
+          </div>
+          <div className="input-box">
             <label>
               <input
                 type="checkbox"
@@ -281,14 +349,12 @@ const EnquiryForm = ({ setUsername }) => {
                 onChange={handleChange}
                 required
               />
-              <span className="terms">I accept the terms and conditions</span>
+              I accept the terms and conditions
             </label>
           </div>
           <div className="button-container">
             <button type="button" onClick={handlePrevStep}>Previous</button>
-            <div className="button">
-              <input type="submit" value="Submit" />
-            </div>
+            <button type="submit">Submit</button>
           </div>
         </div>
       </form>

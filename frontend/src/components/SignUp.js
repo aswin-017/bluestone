@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Assuming you have an AuthContext for handling authentication
-import '../assets/css/SignUp.css'; // Import the CSS file for styling
+import '../assets/css/SignUp.css';
 
 const SignUp = () => {
-  const { signup } = useAuth(); // Assuming useAuth provides a signup function
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   });
+
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,24 +23,45 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
-      await signup(formData); // Assuming signup function sends a POST request to backend
-      navigate('/login'); // Redirect to login page after successful signup
+      const response = await axios.post('http://localhost:3000/api/users/signup', formData);
+      setErrorMessage('User registered successfull');
+
+      alert(response.data.message);
+      navigate('/login');
     } catch (error) {
+      if (error.response && error.response.status === 409) {
+        setErrorMessage('User already registered');
+      } else {
+        setErrorMessage('Signup failed. Please try again.');
+      }
       console.error('Signup Error:', error);
-      // Handle signup error (display error message, etc.)
-      alert('Signup failed. Please try again.'); // Example error handling
     }
   };
 
   return (
-    <form className="signup-form" onSubmit={handleSubmit}>
-      <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="First Name" required />
-      <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} placeholder="Last Name" required />
-      <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
-      <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
-      <button type="submit">Sign Up</button>
-      <p>Already have an account? <a href="/login">Login</a></p>
-    </form>
+    <div className="signup-form">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+        </div>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
   );
 };
 

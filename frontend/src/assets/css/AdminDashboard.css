@@ -1,0 +1,33 @@
+/* src/assets/css/AdminDashboard.css */
+
+.admin-dashboard {
+    padding: 20px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-dashboard h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .admin-dashboard div {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .admin-dashboard h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .admin-dashboard p {
+    font-size: 1.2em;
+    color: #555;
+  }
+  

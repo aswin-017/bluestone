@@ -3,12 +3,15 @@
   line-height: 1px;
   font-size: 20px;
 }
+
 .icon_header {
   vertical-align: middle;
   line-height: 1px;
   font-size: 26px;
 }
-.icon, .icon_header {
+
+.icon,
+.icon_header {
   margin-right: 5px;
 }
 
@@ -26,6 +29,9 @@
   flex-shrink: 0; /* Prevent the sidebar from shrinking */
   height: 100vh; /* Ensure the sidebar takes full height */
   overflow-y: auto; /* Add scroll if the content exceeds viewport height */
+  position: fixed; /* Keep the sidebar fixed */
+  left: 0; /* Position on the left side */
+  top: 0; /* Start from the top */
 }
 
 .sidebar-title {
@@ -64,10 +70,4 @@
 .sidebar-link {
   text-decoration: none;
   color: #9e9ea4;
-}
-
-.sidebar-responsive {
-  display: inline !important;
-  position: absolute;
-  z-index: 12 !important;
 }

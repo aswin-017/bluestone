@@ -1,69 +1,70 @@
 /* Header */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #263043;
-    color: #fff;
-    height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #263043;
+  color: #fff;
+  height: 60px;
+}
+
+/* Header Left */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  padding: 8px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #36404a;
+  color: #ccc;
+  width: 200px; /* Adjust width as needed */
+}
+
+.search-bar::placeholder {
+  color: #ccc;
+}
+
+/* Header Right */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+/* Media Query for Responsive Design */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 10px;
+    height: auto; /* Adjust height for smaller screens */
   }
-  
-  /* Header Left */
-  .header-left {
-    display: flex;
-    align-items: center;
-  }
-  
+
   .search-bar {
-    padding: 8px;
-    margin-left: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #36404a;
-    color: #ccc;
+    width: 150px; /* Adjust width for smaller screens */
   }
-  
-  .search-bar::placeholder {
-    color: #ccc;
-  }
-  
-  /* Header Right */
-  .header-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .icon {
-    font-size: 20px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
+
   .user-name {
-    font-size: 16px;
-    font-weight: 500;
-    margin-right: 10px;
+    display: none;
   }
-  
-  /* Media Query for Responsive Design */
-  @media screen and (max-width: 768px) {
-    .header {
-      padding: 10px;
-    }
-  
-    .search-bar {
-      width: 150px;
-    }
-  
-    .user-name {
-      display: none;
-    }
+}
+
+@media screen and (max-width: 576px) {
+  .search-bar {
+    width: 120px; /* Further adjust width for smallest screens */
   }
-  
-  @media screen and (max-width: 576px) {
-    .search-bar {
-      width: 120px;
-    }
-  }
-  
+}

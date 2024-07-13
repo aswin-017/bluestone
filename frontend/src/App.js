@@ -8,11 +8,11 @@ import Home from './components/Home';
 import UserDashboard from './components/UserDashboard';
 import EnquiryForm from './components/EnquiryForm';
 import Header from './components/Header';
-import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import AdminUserDetails from './components/admin/AdminUserDetails';
+import AdminSideNav from './components/admin/AdminSideNav'; // Import AdminSideNav
 import { ThemeProvider, useTheme } from './components/ThemeContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import PrivateRoute from './components/PrivateRoute';
 import './App.css';
 
 const App = () => {
@@ -55,13 +55,12 @@ const AppContent = ({ loggedInUser, setLoggedInUser, loggedInAdmin, setLoggedInA
       <div className={`app-container ${theme}`}>
         {loggedInAdmin ? (
           <div className="flex-container">
-            <SideNav setLoggedInAdmin={setLoggedInAdmin} />
+            <AdminSideNav setLoggedInAdmin={setLoggedInAdmin} /> {/* Use AdminSideNav */}
             <div className="main-content">
-              <Header loggedInAdmin={loggedInAdmin} />
+              <Header loggedInUser={loggedInUser} loggedInAdmin={loggedInAdmin} />
               <Routes>
-                <Route path="/admin/login" element={<AdminLogin setLoggedInAdmin={setLoggedInAdmin} />} />
-                <Route path="/admin/dashboard" element={<AdminDashboard loggedInAdmin={loggedInAdmin} />} />
-                <Route path="/admin/userdetails" element={<AdminUserDetails />} />
+                <Route path="/admin/dashboard" element={<PrivateRoute role="admin" loggedInAdmin={loggedInAdmin} element={AdminDashboard} />} />
+                <Route path="/admin/userdetails" element={<PrivateRoute role="admin" loggedInAdmin={loggedInAdmin} element={AdminUserDetails} />} />
                 <Route path="*" element={<Navigate to="/admin/dashboard" />} />
               </Routes>
             </div>
@@ -70,11 +69,11 @@ const AppContent = ({ loggedInUser, setLoggedInUser, loggedInAdmin, setLoggedInA
           <div className="flex-container">
             <SideNav setLoggedInUser={setLoggedInUser} />
             <div className="main-content">
-              <Header loggedInUser={loggedInUser} />
+              <Header loggedInUser={loggedInUser} loggedInAdmin={loggedInAdmin} />
               <Routes>
                 <Route path="/" element={<Navigate to="/user/dashboard" />} />
-                <Route path="/user/dashboard" element={<UserDashboard loggedInUser={loggedInUser} />} />
-                <Route path="/enquiryform" element={<EnquiryForm loggedInUser={loggedInUser} />} />
+                <Route path="/user/dashboard" element={<PrivateRoute role="user" loggedInUser={loggedInUser} element={UserDashboard} />} />
+                <Route path="/enquiryform" element={<PrivateRoute role="user" loggedInUser={loggedInUser} element={EnquiryForm} />} />
                 <Route path="*" element={<Navigate to="/user/dashboard" />} />
               </Routes>
             </div>
@@ -84,30 +83,8 @@ const AppContent = ({ loggedInUser, setLoggedInUser, loggedInAdmin, setLoggedInA
             <Nav />
             <div className={`content ${theme}`}>
               <Routes>
-                <Route
-                  path="/login"
-                  element={
-                    <ProtectedRoute loggedInUser={loggedInUser}>
-                      <Login setLoggedInUser={setLoggedInUser} />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/signup"
-                  element={
-                    <ProtectedRoute loggedInUser={loggedInUser}>
-                      <SignUp />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/login"
-                  element={
-                    <ProtectedRoute loggedInAdmin={loggedInAdmin}>
-                      <AdminLogin setLoggedInAdmin={setLoggedInAdmin} />
-                    </ProtectedRoute>
-                  }
-                />
+                <Route path="/login" element={<Login setLoggedInUser={setLoggedInUser} setLoggedInAdmin={setLoggedInAdmin} />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<Navigate to="/login" />} />
               </Routes>

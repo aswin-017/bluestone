@@ -2,7 +2,9 @@ import React from 'react';
 import { FaSearch, FaBell, FaEnvelope, FaUserCircle } from 'react-icons/fa';
 import '../assets/css/Header.css';
 
-const Header = ({ loggedInUser }) => {
+const Header = ({ loggedInUser, loggedInAdmin }) => {
+  const user = loggedInUser || loggedInAdmin;
+
   return (
     <header className="header">
       <div className="header-left">
@@ -13,7 +15,7 @@ const Header = ({ loggedInUser }) => {
         <FaBell className="icon" />
         <FaEnvelope className="icon" />
         <FaUserCircle className="icon" />
-        <span className="user-name">{loggedInUser?.firstName} {loggedInUser?.lastName}</span>
+        <span className="user-name">{user?.firstName} {user?.lastName}</span>
       </div>
     </header>
   );

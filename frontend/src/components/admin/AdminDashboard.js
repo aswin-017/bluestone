@@ -1,6 +1,7 @@
 // src/components/admin/AdminDashboard.js
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../../assets/css/AdminDashboard.css';
 
 const AdminDashboard = ({ loggedInAdmin }) => {
   const [userCount, setUserCount] = useState(0);
@@ -8,7 +9,7 @@ const AdminDashboard = ({ loggedInAdmin }) => {
   useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const response = await axios.get('/api/admin/usercount');
+        const response = await axios.get('http://localhost:3000/api/admin/usercount');
         setUserCount(response.data.count);
       } catch (error) {
         console.error('Error fetching user count:', error);
@@ -20,7 +21,7 @@ const AdminDashboard = ({ loggedInAdmin }) => {
 
   return (
     <div className="admin-dashboard">
-      <h2>Welcome, {loggedInAdmin.email}</h2>
+      <h2>Welcome, {loggedInAdmin ? loggedInAdmin.email : 'Admin'}</h2>
       <div>
         <h3>User Statistics</h3>
         <p>Total Users: {userCount}</p>

@@ -52,6 +52,8 @@
 
 .login-form input[type='email'],
 .login-form input[type='password'],
+.login-form input[type='text'],
+.login-form select,
 .login-form button {
   display: block;
   width: 100%;
@@ -63,13 +65,15 @@
 }
 
 .login-form input[type='email'],
-.login-form input[type='password'] {
+.login-form input[type='password'],
+.login-form input[type='text'] {
   background-color: var(--light-content-bg);
   color: var(--light-text-color);
 }
 
 .login-form.dark input[type='email'],
-.login-form.dark input[type='password'] {
+.login-form.dark input[type='password'],
+.login-form.dark input[type='text'] {
   background-color: var(--dark-content-bg);
   color: var(--dark-text-color);
 }
@@ -113,4 +117,18 @@
 .error-message {
   color: red;
   margin-bottom: 1rem;
+}
+
+.show-password-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.show-password-container input[type='checkbox'] {
+  margin-right: 0.5rem;
+}
+
+.show-password-container label {
+  margin: 0;
 }

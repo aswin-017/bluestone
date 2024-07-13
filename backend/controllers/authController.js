@@ -36,7 +36,6 @@ exports.signup = async (req, res) => {
 };
 
 
-
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -60,7 +59,7 @@ exports.login = async (req, res) => {
         { expiresIn: '1h' }
       );
       res.cookie('token', token, { httpOnly: true });
-      res.status(200).json({ message: 'Login successful', token, user: { firstName: user.first_name, lastName: user.last_name } });
+      res.status(200).json({ message: 'Login successful', token, user: { firstName: user.first_name, lastName: user.last_name }, admin: null });
     });
   } catch (error) {
     console.error('Error logging in user:', error);

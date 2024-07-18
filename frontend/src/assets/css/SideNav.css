@@ -1,3 +1,44 @@
+:root {
+  --sidebar-width: 200px;
+  --sidebar-transition: transform 0.3s ease;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #1d2634;
+  color: #9e9ea4;
+}
+
+#sidebar {
+  width: var(--sidebar-width);
+  background-color: #263043;
+  color: #9e9ea4;
+  flex-shrink: 0;
+  height: 100vh;
+  overflow-y: auto;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translateX(-100%);
+  transition: var(--sidebar-transition);
+}
+
+#sidebar.open {
+  transform: translateX(0);
+}
+
+.toggle-icon {
+  font-size: 26px;
+  margin: 10px;
+  cursor: pointer;
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  z-index: 1000;
+}
+
 .icon {
   vertical-align: middle;
   line-height: 1px;
@@ -20,18 +61,6 @@
   margin-left: 30px;
   margin-top: 10px;
   cursor: pointer;
-}
-
-#sidebar {
-  width: 200px; /* Set the sidebar width */
-  background-color: #263043;
-  color: #9e9ea4;
-  flex-shrink: 0; /* Prevent the sidebar from shrinking */
-  height: 100vh; /* Ensure the sidebar takes full height */
-  overflow-y: auto; /* Add scroll if the content exceeds viewport height */
-  position: fixed; /* Keep the sidebar fixed */
-  left: 0; /* Position on the left side */
-  top: 0; /* Start from the top */
 }
 
 .sidebar-title {
@@ -70,4 +99,22 @@
 .sidebar-link {
   text-decoration: none;
   color: #9e9ea4;
+}
+
+@media screen and (max-width: 768px) {
+  #sidebar {
+    transform: translateX(-100%);
+  }
+
+  #sidebar.open {
+    transform: translateX(0);
+  }
+
+  .toggle-icon {
+    display: block;
+  }
+
+  .sidebar-title > span {
+    display: block;
+  }
 }
